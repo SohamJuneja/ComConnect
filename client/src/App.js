@@ -25,6 +25,7 @@ const App = () => {
                     <Route path="/roles/:workspaceId" element={<RoleCreation />} />
                     <Route path="/invite/:roleId" element={<InvitationLink />} />
                     <Route path="/" element={<Register />} exact />
+                    
                 </Routes>
             </div>
         </Router>
