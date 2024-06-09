@@ -53,4 +53,13 @@ const sendMessage = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { allMessages, sendMessage };
+const deleteAllMessages = asyncHandler(async (req, res) => {
+  try {
+    await Message.deleteMany({});
+    res.status(200).json({ message: 'All messages have been deleted successfully.' });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to delete messages', error: error.message });
+  }
+});
+
+module.exports = { allMessages, sendMessage, deleteAllMessages };

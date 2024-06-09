@@ -209,6 +209,15 @@ const addToGroup = asyncHandler(async (req, res) => {
   }
 });
 
+const deleteAllChats = asyncHandler(async (req, res) => {
+  try {
+    await Chat.deleteMany({});
+    res.status(200).json({ message: 'All chats have been deleted successfully.' });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to delete chats', error: error.message });
+  }
+});
+
 module.exports = {
   accessChat,
   fetchChats,
@@ -216,4 +225,5 @@ module.exports = {
   renameGroup,
   addToGroup,
   removeFromGroup,
+  deleteAllChats
 };

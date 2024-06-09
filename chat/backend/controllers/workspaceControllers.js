@@ -204,6 +204,15 @@ const getGroups = asyncHandler(async (req, res) => {
     res.status(200).json(workspace.groups);
 });
 
+const deleteAllWorkspaces = asyncHandler(async (req, res) => {
+    try {
+      await Workspace.deleteMany({});
+      res.status(200).json({ message: 'All workspaces have been deleted successfully.' });
+    } catch (error) {
+      res.status(500).json({ message: 'Failed to delete workspaces', error: error.message });
+    }
+  });
+
 module.exports =
     { createWorkspace,
      addRole, 
@@ -211,4 +220,5 @@ module.exports =
       inviteToRole,
        joinWorkspace,
        getUserWorkspaces,
-       getGroups };
+       getGroups ,
+    deleteAllWorkspaces};
