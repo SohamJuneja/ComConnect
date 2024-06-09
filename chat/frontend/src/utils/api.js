@@ -2,14 +2,14 @@ import axios from 'axios';
 
 const API_URL = "http://localhost:5000/api";
 
-export const fetchChats = async (token) => {
+export const fetchChats = async (token, workspaceId) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
   try {
-    const { data } = await axios.get(`${API_URL}/chat`, config);
+    const { data } = await axios.get(`${API_URL}/chat/workspace/${workspaceId}/chats`, config);
     return data;
   } catch (error) {
     throw error;

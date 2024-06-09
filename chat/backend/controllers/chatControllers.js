@@ -1,20 +1,22 @@
 const asyncHandler = require("express-async-handler");
 const Chat = require("../models/chatModel");
 const User = require("../models/userModel");
+const Workspace = require("../models/workspaceModel");
 
 //@description     Create or fetch One to One Chat
 //@route           POST /api/chat/
 //@access          Protected
 const accessChat = asyncHandler(async (req, res) => {
-  const { userId } = req.body;
+  const { userId, workspaceId } = req.body; // Include workspaceId in the request body
 
-  if (!userId) {
-    console.log("UserId param not sent with request");
+  if (!userId || !workspaceId) {
+    console.log("UserId or WorkspaceId param not sent with request");
     return res.sendStatus(400);
   }
 
   var isChat = await Chat.find({
     isGroupChat: false,
+    workspace: workspaceId, // Add workspaceId to the query
     $and: [
       { users: { $elemMatch: { $eq: req.user._id } } },
       { users: { $elemMatch: { $eq: userId } } },
@@ -35,14 +37,15 @@ const accessChat = asyncHandler(async (req, res) => {
       chatName: "sender",
       isGroupChat: false,
       users: [req.user._id, userId],
+      workspace: workspaceId, // Include workspaceId when creating a new chat
     };
 
     try {
       const createdChat = await Chat.create(chatData);
-      const FullChat = await Chat.findOne({ _id: createdChat._id }).populate(
-        "users",
-        "-password"
-      );
+      const FullChat = await Chat.findOne({ _id: createdChat._id })
+        .populate("users", "-password")
+        .populate("workspace"); // Optionally populate workspace details
+
       res.status(200).json(FullChat);
     } catch (error) {
       res.status(400);
@@ -51,12 +54,17 @@ const accessChat = asyncHandler(async (req, res) => {
   }
 });
 
-//@description     Fetch all chats for a user
+//@description     Fetch all chats for a user based upon workspace
 //@route           GET /api/chat/
 //@access          Protected
 const fetchChats = asyncHandler(async (req, res) => {
+  const { workspaceId } = req.params; // Assuming workspaceId is passed as a URL parameter
+
   try {
-    Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
+    Chat.find({ 
+        users: { $elemMatch: { $eq: req.user._id } },
+        workspace: workspaceId  // Filter chats by workspaceId
+      })
       .populate("users", "-password")
       .populate("groupAdmin", "-password")
       .populate("latestMessage")
@@ -78,11 +86,13 @@ const fetchChats = asyncHandler(async (req, res) => {
 //@route           POST /api/chat/group
 //@access          Protected
 const createGroupChat = asyncHandler(async (req, res) => {
-  if (!req.body.users || !req.body.name) {
-    return res.status(400).send({ message: "Please Fill all the feilds" });
+  const { users: usersJSON, name, workspaceId } = req.body;  
+
+  if (!usersJSON || !name || !workspaceId) {
+    return res.status(400).send({ message: "Please fill all the fields" });
   }
 
-  var users = JSON.parse(req.body.users);
+  const users = JSON.parse(usersJSON);
 
   if (users.length < 2) {
     return res
@@ -94,22 +104,28 @@ const createGroupChat = asyncHandler(async (req, res) => {
 
   try {
     const groupChat = await Chat.create({
-      chatName: req.body.name,
+      chatName: name,
       users: users,
       isGroupChat: true,
       groupAdmin: req.user,
+      workspace: workspaceId, // Associate group chat with the workspace
     });
 
     const fullGroupChat = await Chat.findOne({ _id: groupChat._id })
       .populate("users", "-password")
       .populate("groupAdmin", "-password");
 
+    // Update workspace with the new group chat
+    await Workspace.findByIdAndUpdate(workspaceId, {
+      $push: { groups: groupChat._id }
+    });
+
     res.status(200).json(fullGroupChat);
   } catch (error) {
-    res.status(400);
-    throw new Error(error.message);
+    res.status(400).send(error.message);
   }
 });
+
 
 // @desc    Rename Group
 // @route   PUT /api/chat/rename

@@ -72,7 +72,7 @@ const Signup = () => {
       });
       localStorage.setItem("userInfo", JSON.stringify(data));
       setPicLoading(false);
-      navigate("/chats");
+      navigate("/workspace");
     } catch (error) {
     
       toast({

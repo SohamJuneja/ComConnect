@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
+import { useParams } from "react-router-dom"; // Import useParams
 import { ChatState } from "../../Context/ChatProvider";
 import UserBadgeItem from "../userAvatar/UserBadgeItem";
 import UserListItem from "../userAvatar/UserListItem";
@@ -27,8 +28,8 @@ const GroupChatModal = ({ children }) => {
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
   const toast = useToast();
-
   const { user, chats, setChats } = ChatState();
+  const { workspaceId } = useParams(); // Use useParams to get workspaceId
 
   const handleGroup = (userToAdd) => {
     if (selectedUsers.includes(userToAdd)) {
@@ -41,7 +42,6 @@ const GroupChatModal = ({ children }) => {
       });
       return;
     }
-
     setSelectedUsers([...selectedUsers, userToAdd]);
   };
 
@@ -50,7 +50,6 @@ const GroupChatModal = ({ children }) => {
     if (!query) {
       return;
     }
-
     try {
       setLoading(true);
       const config = {
@@ -58,13 +57,12 @@ const GroupChatModal = ({ children }) => {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.get(`http://localhost:5000/api/user?search=${search}`, config);
-      console.log(data);
+      const { data } = await axios.get(`http://localhost:5000/api/user?search=${search}&workspaceId=${workspaceId}`, config);
       setLoading(false);
       setSearchResult(data);
     } catch (error) {
       toast({
-        title: "Error Occured!",
+        title: "Error Occurred!",
         description: "Failed to Load the Search Results",
         status: "error",
         duration: 5000,
@@ -79,9 +77,9 @@ const GroupChatModal = ({ children }) => {
   };
 
   const handleSubmit = async () => {
-    if (!groupChatName || !selectedUsers) {
+    if (!groupChatName && selectedUsers.length === 0 && !workspaceId) {
       toast({
-        title: "Please fill all the feilds",
+        title: "Please fill all the fields",
         status: "warning",
         duration: 5000,
         isClosable: true,
@@ -89,7 +87,10 @@ const GroupChatModal = ({ children }) => {
       });
       return;
     }
-
+  
+    console.log("Submitting:", groupChatName, selectedUsers, workspaceId); // Debug log
+  
+    if(workspaceId){
     try {
       const config = {
         headers: {
@@ -101,6 +102,7 @@ const GroupChatModal = ({ children }) => {
         {
           name: groupChatName,
           users: JSON.stringify(selectedUsers.map((u) => u._id)),
+          workspaceId,
         },
         config
       );
@@ -114,6 +116,7 @@ const GroupChatModal = ({ children }) => {
         position: "bottom",
       });
     } catch (error) {
+      console.error("Failed to create group chat:", error.response); // Debug log
       toast({
         title: "Failed to Create the Chat!",
         description: error.response.data,
@@ -123,21 +126,15 @@ const GroupChatModal = ({ children }) => {
         position: "bottom",
       });
     }
-  };
+  }};
 
   return (
     <>
       <span onClick={onOpen}>{children}</span>
-
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader
-            fontSize="35px"
-            fontFamily="Work sans"
-            d="flex"
-            justifyContent="center"
-          >
+          <ModalHeader fontSize="35px" fontFamily="Work sans" d="flex" justifyContent="center">
             Create Group Chat
           </ModalHeader>
           <ModalCloseButton />
@@ -166,7 +163,6 @@ const GroupChatModal = ({ children }) => {
               ))}
             </Box>
             {loading ? (
-              // <ChatLoading />
               <div>Loading...</div>
             ) : (
               searchResult

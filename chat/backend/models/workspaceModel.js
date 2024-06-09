@@ -11,6 +11,7 @@ const workspaceSchema = mongoose.Schema(
       },
     ],
     users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    groups: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Chat' }], // New field to store groups
   },
   { timestamps: true }
 );

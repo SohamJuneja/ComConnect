@@ -30,17 +30,23 @@ const createWorkspace = asyncHandler(async (req, res) => {
       chatName: role, // Using role name directly as the group name
       isGroupChat: true,
       users: [user._id], // Add the creator as a member
-      groupAdmin: user._id
+      groupAdmin: user._id,
+      workspace: workspace._id // Link the group to the workspace
     }));
   
     // Save groups to database
     const createdGroups = await Chat.insertMany(groups);
+  
+    // Update workspace with the created groups
+    workspace.groups = createdGroups.map(group => group._id);
+    await workspace.save();
   
     res.status(201).json({
       workspace,
       groups: createdGroups
     });
   });
+  
 
 
 //@description     Add role to workspace
@@ -174,5 +180,35 @@ const joinWorkspace = asyncHandler(async (req, res) => {
     });
 });
 
+const getUserWorkspaces = asyncHandler(async (req, res) => {
+    const user = req.user; // Assuming user object is available in req
 
-module.exports = { createWorkspace, addRole, getRoles, inviteToRole, joinWorkspace };
+    const workspaces = await Workspace.find({ users: user._id });
+    res.status(200).json(workspaces);
+});
+
+
+const getGroups = asyncHandler(async (req, res) => {
+    const workspaceId = req.params.id;
+
+    const workspace = await Workspace.findById(workspaceId).populate('groups');
+    console.log("workspace",workspace);
+    console.log("groups",workspace.groups);
+
+  
+    if (!workspace) {
+      res.status(404);
+      throw new Error('Workspace not found');
+    }
+  
+    res.status(200).json(workspace.groups);
+});
+
+module.exports =
+    { createWorkspace,
+     addRole, 
+     getRoles,
+      inviteToRole,
+       joinWorkspace,
+       getUserWorkspaces,
+       getGroups };

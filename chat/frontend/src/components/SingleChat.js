@@ -69,6 +69,9 @@ ChatState();
     }
   };
 
+  const token = user.token;
+  console.log(token);
+
   const sendMessage = async (event) => {
     if (event.key === "Enter" && newMessage) {
       socket.emit("stop typing", selectedChat._id);
