@@ -3,8 +3,10 @@ const dotenv = require('dotenv');
 const userRoutes = require('./routes/userRoutes');
 const chatRoutes = require('./routes/chatRoutes');
 const messageRoutes = require('./routes/messageRoutes');
-const workspaceRoutes = require('./routes/workspaceRoutes'); // Add this line
+const workspaceRoutes = require('./routes/workspaceRoutes');
+const taskRoutes = require('./routes/taskAllocatorRoutes.js');  
 const { notFound, errorHandler } = require('./middleware/errorMiddleware');
+
 const path = require('path');
 const Connection = require('./config/db');
 const cors = require('cors');
@@ -25,7 +27,8 @@ Connection(username, password);
 app.use('/api/user', userRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/message', messageRoutes);
-app.use('/api/workspace', workspaceRoutes); // Add this line
+app.use('/api/workspace', workspaceRoutes);  
+app.use('/api/tasks', taskRoutes);
 
 // Error Handling middlewares
 app.use(notFound);

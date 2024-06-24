@@ -7,7 +7,7 @@ import JoinWorkspaceModal from "./JoinWorkspaceModal";
 
 const WorkspaceSelection = () => {
   const { userWorkspaces, setUserWorkspaces } = useWorkspace();
-  console.log("worspaces", userWorkspaces);
+  console.log("workspaces", userWorkspaces);
   const navigate = useNavigate();
 
   const handleSelectWorkspace = (workspace) => {
@@ -19,14 +19,18 @@ const WorkspaceSelection = () => {
     <VStack spacing="10px">
       <CreateWorkspaceModal>Create Workspace</CreateWorkspaceModal>
       <JoinWorkspaceModal>Join Workspace</JoinWorkspaceModal>
-      {userWorkspaces?.map((workspace) => (
-        <Button
-          key={workspace._id}
-          onClick={() => handleSelectWorkspace(workspace)}
-        >
-          {workspace.workspaceName}
-        </Button>
-      ))}
+      {Array.isArray(userWorkspaces) && userWorkspaces.length > 0 ? (
+        userWorkspaces.map((workspace) => (
+          <Button
+            key={workspace._id}
+            onClick={() => handleSelectWorkspace(workspace)}
+          >
+            {workspace.workspaceName}
+          </Button>
+        ))
+      ) : (
+        <Box>No workspaces available</Box>
+      )}
     </VStack>
   );
 };

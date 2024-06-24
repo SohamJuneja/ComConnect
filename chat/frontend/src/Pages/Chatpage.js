@@ -4,6 +4,8 @@ import Chatbox from "../components/Chatbox";
 import MyChats from "../components/MyChats";
 import SideDrawer from "../components/miscellaneous/SideDrawer";
 import { ChatState } from "../Context/ChatProvider";
+import Task from "../components/Task_allocator/task";
+import TaskAllocator from "../components/Task_allocator/task";
 
 const Chatpage = () => {
   const [fetchAgain, setFetchAgain] = useState(false);
@@ -17,7 +19,9 @@ const Chatpage = () => {
         {user && (
           <Chatbox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
         )}
+       <TaskAllocator/>
       </Box>
+      
     </div>
   );
 };
