@@ -26,14 +26,15 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
 };
 
 userSchema.pre('save', async function (next) {
-  if (!this.isModified) {
-    next();
+  // Only hash the password if it has been modified (or is new)
+  if (this.isModified('password')) {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
   }
-
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
+  next(); // Make sure to proceed to the next middleware
 });
 
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
+

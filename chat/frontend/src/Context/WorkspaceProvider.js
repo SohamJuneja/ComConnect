@@ -36,7 +36,7 @@ const WorkspaceProvider = ({ children }) => {
         }
       }
     };
-
+  
     fetchUserWorkspaces();
   }, [user?.token]);
 

@@ -6,11 +6,12 @@ import CreateWorkspaceModal from "./CreateWorkspaceModal";
 import JoinWorkspaceModal from "./JoinWorkspaceModal";
 
 const WorkspaceSelection = () => {
-  const { workspaces, setSelectedWorkspace } = useWorkspace();
+  const { userWorkspaces, setUserWorkspaces } = useWorkspace();
+  console.log("worspaces", userWorkspaces);
   const navigate = useNavigate();
 
   const handleSelectWorkspace = (workspace) => {
-    setSelectedWorkspace(workspace);
+    setUserWorkspaces(workspace);
     navigate("/chats");
   };
 
@@ -18,12 +19,12 @@ const WorkspaceSelection = () => {
     <VStack spacing="10px">
       <CreateWorkspaceModal>Create Workspace</CreateWorkspaceModal>
       <JoinWorkspaceModal>Join Workspace</JoinWorkspaceModal>
-      {workspaces.map((workspace) => (
+      {userWorkspaces?.map((workspace) => (
         <Button
           key={workspace._id}
           onClick={() => handleSelectWorkspace(workspace)}
         >
-          {workspace.name}
+          {workspace.workspaceName}
         </Button>
       ))}
     </VStack>

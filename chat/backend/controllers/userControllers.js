@@ -64,22 +64,33 @@ const registerUser = asyncHandler(async (req, res) => {
 //@access          Public
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-
   const user = await User.findOne({ email });
 
-  if (user && (await user.matchPassword(password))) {
-    res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
-      pic: user.pic,
-      token: generateToken(user._id),
-    });
-  } else {
-    res.status(401);
-    throw new Error("Invalid Email or Password");
+  if (!user) {
+    return res.status(401).json({ message: "User not found" });
   }
+
+  const isMatch = await user.matchPassword(password);
+  if (!isMatch) {
+    return res.status(401).json({ message: "Invalid password" });
+  }
+
+  const token = generateToken(user._id);
+  res.json({
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    isAdmin: user.isAdmin,
+    pic: user.pic,
+    token: token,
+  });
 });
 
-module.exports = { allUsers, registerUser, authUser };
+const deleteAllUsers = asyncHandler(async (req, res) => {
+ 
+  await User.deleteMany({});
+  res.status(200).json({ message: 'All users have been deleted successfully.' });
+});
+
+
+module.exports = { allUsers, registerUser, authUser, deleteAllUsers };
