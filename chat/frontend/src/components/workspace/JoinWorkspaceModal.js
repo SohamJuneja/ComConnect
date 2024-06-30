@@ -16,6 +16,7 @@ import {
 import axios from "axios";
 import { ChatState } from "../../Context/ChatProvider";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { joinspace } from "../../utils/media/media";
 
 const JoinWorkspaceModal = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -91,7 +92,7 @@ const JoinWorkspaceModal = ({ children }) => {
 
       setChats(data.group); // Update chats with the joined group
       onClose();
-      
+
       navigate(`/workspace/${workspaceId}/chats`); // Redirect to the workspace chat
     } catch (error) {
       toast({
@@ -113,6 +114,13 @@ const JoinWorkspaceModal = ({ children }) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
+          <img
+            className="join_workspace_img"
+            width={350}
+            height={200}
+            src={joinspace}
+            alt="workspace"
+          />
           <ModalHeader>Join Workspace</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
@@ -130,10 +138,17 @@ const JoinWorkspaceModal = ({ children }) => {
             </FormControl>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={joinWorkspace} isLoading={loading}>
+            <Button
+              colorScheme="blue"
+              mr={3}
+              onClick={joinWorkspace}
+              isLoading={loading}
+            >
               Join
             </Button>
-            <Button variant="ghost" onClick={onClose}>Cancel</Button>
+            <Button variant="ghost" onClick={onClose}>
+              Cancel
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

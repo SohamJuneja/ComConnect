@@ -1,0 +1,200 @@
+.workspace_page {
+  width: 100%;
+  height: 100%;
+  padding: 0.2rem;
+}
+.workspace_display {
+  width: 100%;
+  height: 45vh;
+  display: flex;
+  gap: 5rem;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, rgb(180, 92, 224), rgb(72, 21, 139));
+  color: #fff;
+}
+
+.workspace_content {
+  width: 40%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.workspace_content_heading {
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.workspace_content_description {
+  font-size: 18px;
+  font-weight: 400;
+}
+.create_workspace_btn {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: #fff;
+  background-color: #2d83a8;
+  border-radius: 10px;
+  width: 50%;
+}
+.create_workspace_btn_container {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.workspace_img_container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 40%;
+  height: 100%;
+}
+.workspace_img {
+  width: 80%;
+  height: 100%;
+}
+
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 400;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
+.modal h2 {
+  font-size: 28px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.modal_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+.modal_button {
+  display: flex;
+  width: 40%;
+
+  justify-content: space-evenly;
+  margin-top: 1rem;
+}
+.modal_button button {
+  width: 15%;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #2d83a8;
+  color: #fff;
+  border-radius: 10px;
+}
+
+.workspace_holder {
+  background-color: #fff;
+
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+.workspace_holder input {
+  border-radius: 10px;
+  padding: 10px;
+  border: 1px solid #000;
+}
+
+.workspace_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.workspace_btn {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.workspace_btn button {
+  /* width: 100%; */
+  margin-top: 1rem;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: #000;
+  background-color: #c8c3c3db;
+  border-radius: 10px;
+  border: 1px solid #fff;
+}
+.join_workspace_btn {
+  /* width: 100%; */
+
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #2d83a8;
+  color: #fff;
+  border-radius: 10px;
+  transition: all 0.3s;
+  font-size: 22px;
+}
+
+.join_workspace_btn:hover {
+  cursor: pointer;
+  transform: scale(1.04, 1.05);
+}
+.simple {
+  font-size: 20px;
+  font-style: italic;
+}
+
+.join_workspace_img {
+  width: 100%;
+  height: 20%;
+}
+
+.workspace_main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.worksapce_lol {
+  width: 100%;
+  height: 80%;
+}
+
+.join_workspace_modal {
+  width: 100%;
+  height: 20%;
+}
+.join_workspace_lol {
+  height: 100%;
+  width: 100%;
+  display: flex;
+
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+}

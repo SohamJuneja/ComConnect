@@ -4,7 +4,7 @@ import { useWorkspace } from "../../Context/WorkspaceProvider";
 import { useNavigate } from "react-router-dom";
 import CreateWorkspaceModal from "./CreateWorkspaceModal";
 import JoinWorkspaceModal from "./JoinWorkspaceModal";
-
+import "./workspace.css";
 const WorkspaceSelection = () => {
   const { userWorkspaces, setUserWorkspaces } = useWorkspace();
   console.log("workspaces", userWorkspaces);
@@ -16,22 +16,33 @@ const WorkspaceSelection = () => {
   };
 
   return (
-    <VStack spacing="10px">
-      <CreateWorkspaceModal>Create Workspace</CreateWorkspaceModal>
-      <JoinWorkspaceModal>Join Workspace</JoinWorkspaceModal>
-      {Array.isArray(userWorkspaces) && userWorkspaces.length > 0 ? (
-        userWorkspaces.map((workspace) => (
-          <Button
-            key={workspace._id}
-            onClick={() => handleSelectWorkspace(workspace)}
-          >
-            {workspace.workspaceName}
-          </Button>
-        ))
-      ) : (
-        <Box>No workspaces available</Box>
-      )}
-    </VStack>
+    <div className="workspace_main">
+      <div className="workspace_lol">
+        <CreateWorkspaceModal>Create Workspace</CreateWorkspaceModal>
+      </div>
+
+      <div className="join_workspace_modal">
+        <div className="join_workspace_lol">
+          <JoinWorkspaceModal>
+            <div className="join_workspace_btn">Join Workspace</div>
+          </JoinWorkspaceModal>
+          {Array.isArray(userWorkspaces) && userWorkspaces.length > 0 ? (
+            userWorkspaces.map((workspace) => (
+              <Button
+                key={workspace._id}
+                onClick={() => handleSelectWorkspace(workspace)}
+              >
+                {workspace.workspaceName}
+              </Button>
+            ))
+          ) : (
+            <Box>
+              <div className="simple">"No workspaces available"</div>
+            </Box>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 
