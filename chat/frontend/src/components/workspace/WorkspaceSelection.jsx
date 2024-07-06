@@ -12,7 +12,9 @@ const WorkspaceSelection = () => {
 
   const handleSelectWorkspace = (workspace) => {
     setUserWorkspaces(workspace);
-    navigate("/chats");
+    let workspaceId = workspace._id;
+    console.log("worksapce_id",workspace._id);
+    navigate(`/workspace/${workspaceId}/chats`);
   };
 
   return (

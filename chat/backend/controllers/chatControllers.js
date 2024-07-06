@@ -133,24 +133,29 @@ const createGroupChat = asyncHandler(async (req, res) => {
 const renameGroup = asyncHandler(async (req, res) => {
   const { chatId, chatName } = req.body;
 
-  const updatedChat = await Chat.findByIdAndUpdate(
-    chatId,
-    {
-      chatName: chatName,
-    },
-    {
-      new: true,
-    }
-  )
-    .populate("users", "-password")
-    .populate("groupAdmin", "-password");
+  // Find the chat by ID
+  const chat = await Chat.findById(chatId);
 
-  if (!updatedChat) {
+  if (!chat) {
     res.status(404);
     throw new Error("Chat Not Found");
-  } else {
-    res.json(updatedChat);
   }
+
+  // Check if the chat is a predefined group
+  const predefinedGroupPattern = /^[0-9]+(\+[0-9]+)*$/; // Example pattern for predefined groups like "1", "1+2", "1+2+3"
+  if (predefinedGroupPattern.test(chat.chatName)) {
+    res.status(400);
+    throw new Error("Cannot rename predefined groups created during workspace creation.");
+  }
+
+  // Update the chat name
+  chat.chatName = chatName;
+  const updatedChat = await chat.save();
+
+  // Populate the necessary fields
+  await updatedChat.populate("users", "-password").populate("groupAdmin", "-password").execPopulate();
+
+  res.json(updatedChat);
 });
 
 // @desc    Remove user from Group
@@ -159,7 +164,19 @@ const renameGroup = asyncHandler(async (req, res) => {
 const removeFromGroup = asyncHandler(async (req, res) => {
   const { chatId, userId } = req.body;
 
-  // check if the requester is admin
+  // Find the chat by ID
+  const chat = await Chat.findById(chatId);
+
+  if (!chat) {
+    res.status(404);
+    throw new Error("Chat Not Found");
+  }
+
+  // Check if the requester is admin
+  if (chat.groupAdmin.toString() !== req.user._id.toString()) {
+    res.status(403);
+    throw new Error("Only admins can remove users from the group");
+  }
 
   const removed = await Chat.findByIdAndUpdate(
     chatId,

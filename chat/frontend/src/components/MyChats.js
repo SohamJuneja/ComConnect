@@ -43,6 +43,9 @@ const MyChats = ({ fetchAgain }) => {
     handleFetchChats();
   }, [fetchAgain, workspaceId]);
 
+  // Sort chats by chatName
+  const sortedChats = Array.isArray(chats) ? [...chats].sort((a, b) => a.chatName.length - b.chatName.length) : [];
+
   return (
     <Box
       d={{ base: selectedChat ? "none" : "flex", md: "flex" }}
@@ -87,7 +90,7 @@ const MyChats = ({ fetchAgain }) => {
       >
       {Array.isArray(chats) ? (
   <Stack overflowY="scroll">
-    {chats.map((chat) => (
+    {sortedChats.map((chat) => (
       <Box
         onClick={() => setSelectedChat(chat)}
         cursor="pointer"
