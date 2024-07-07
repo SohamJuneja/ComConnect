@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = "http://localhost:5001/api";
 
 export const fetchChats = async (token, workspaceId) => {
   const config = {
@@ -9,13 +9,15 @@ export const fetchChats = async (token, workspaceId) => {
     },
   };
   try {
-    const { data } = await axios.get(`${API_URL}/chat/workspace/${workspaceId}/chats`, config);
+    const { data } = await axios.get(
+      `${API_URL}/chat/workspace/${workspaceId}/chats`,
+      config
+    );
     return data;
   } catch (error) {
     throw error;
   }
 };
-
 
 export const fetchMessages = async (chatId, token) => {
   const config = {

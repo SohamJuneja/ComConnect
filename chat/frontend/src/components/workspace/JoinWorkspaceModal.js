@@ -44,7 +44,7 @@ const JoinWorkspaceModal = ({ children }) => {
             return;
           }
 
-          const url = `http://localhost:5000/api/workspace/${workspaceId}/groups`;
+          const url = `http://localhost:5001/api/workspace/${workspaceId}/groups`;
           const { data } = await axios.get(url, config);
           setGroups(data);
         } catch (error) {
@@ -77,7 +77,7 @@ const JoinWorkspaceModal = ({ children }) => {
       }
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/workspace/join",
+        "http://localhost:5001/api/workspace/join",
         { workspaceId, groupId },
         config
       );

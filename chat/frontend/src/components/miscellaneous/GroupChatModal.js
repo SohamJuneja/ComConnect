@@ -57,7 +57,10 @@ const GroupChatModal = ({ children }) => {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.get(`http://localhost:5000/api/user?search=${search}&workspaceId=${workspaceId}`, config);
+      const { data } = await axios.get(
+        `http://localhost:5001/api/user?search=${search}&workspaceId=${workspaceId}`,
+        config
+      );
       setLoading(false);
       setSearchResult(data);
     } catch (error) {
@@ -87,46 +90,47 @@ const GroupChatModal = ({ children }) => {
       });
       return;
     }
-  
+
     console.log("Submitting:", groupChatName, selectedUsers, workspaceId); // Debug log
-  
-    if(workspaceId){
-    try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      };
-      const { data } = await axios.post(
-        `http://localhost:5000/api/chat/group`,
-        {
-          name: groupChatName,
-          users: JSON.stringify(selectedUsers.map((u) => u._id)),
-          workspaceId,
-        },
-        config
-      );
-      setChats([data, ...chats]);
-      onClose();
-      toast({
-        title: "New Group Chat Created!",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
-      });
-    } catch (error) {
-      console.error("Failed to create group chat:", error.response); // Debug log
-      toast({
-        title: "Failed to Create the Chat!",
-        description: error.response.data,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
-      });
+
+    if (workspaceId) {
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        };
+        const { data } = await axios.post(
+          `http://localhost:5001/api/chat/group`,
+          {
+            name: groupChatName,
+            users: JSON.stringify(selectedUsers.map((u) => u._id)),
+            workspaceId,
+          },
+          config
+        );
+        setChats([data, ...chats]);
+        onClose();
+        toast({
+          title: "New Group Chat Created!",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+          position: "bottom",
+        });
+      } catch (error) {
+        console.error("Failed to create group chat:", error.response); // Debug log
+        toast({
+          title: "Failed to Create the Chat!",
+          description: error.response.data,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "bottom",
+        });
+      }
     }
-  }};
+  };
 
   return (
     <>
@@ -134,7 +138,12 @@ const GroupChatModal = ({ children }) => {
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader fontSize="35px" fontFamily="Work sans" d="flex" justifyContent="center">
+          <ModalHeader
+            fontSize="35px"
+            fontFamily="Work sans"
+            d="flex"
+            justifyContent="center"
+          >
             Create Group Chat
           </ModalHeader>
           <ModalCloseButton />
