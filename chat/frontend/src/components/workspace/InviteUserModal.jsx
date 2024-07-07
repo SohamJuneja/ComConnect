@@ -27,7 +27,7 @@ const InviteUserModal = ({ roleId }) => {
       toast({
         title: "Please enter an email",
         status: "warning",
-        duration: 5000,
+        duration: 5001,
         isClosable: true,
       });
       return;
@@ -41,7 +41,7 @@ const InviteUserModal = ({ roleId }) => {
       };
 
       await axios.post(
-        `http://localhost:5000/api/workspace/${selectedWorkspace._id}/invite`,
+        `http://localhost:5001/api/workspace/${selectedWorkspace._id}/invite`,
         { email, roleId },
         config
       );

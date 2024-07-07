@@ -7,13 +7,11 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const Signup = () => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   const toast = useToast();
   const navigate = useNavigate();
-
 
   const [name, setName] = useState();
   const [email, setEmail] = useState();
@@ -28,7 +26,7 @@ const Signup = () => {
       toast({
         title: "Please Fill all the Feilds",
         status: "warning",
-        duration: 5000,
+        duration: 5001,
         isClosable: true,
         position: "bottom",
       });
@@ -53,7 +51,7 @@ const Signup = () => {
         },
       };
       const { data } = await axios.post(
-        "http://localhost:5000/api/user",
+        "http://localhost:5001/api/user",
         {
           name,
           email,
@@ -74,7 +72,6 @@ const Signup = () => {
       setPicLoading(false);
       navigate("/workspace");
     } catch (error) {
-    
       toast({
         title: "Error Occured!",
         description: error.response.data.message,

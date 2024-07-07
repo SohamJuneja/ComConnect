@@ -14,7 +14,7 @@ import animationData from "../animations/typing.json";
 import io from "socket.io-client";
 import UpdateGroupChatModal from "./miscellaneous/UpdateGroupChatModal";
 import { ChatState } from "../Context/ChatProvider";
-const ENDPOINT = "http://localhost:5000"; 
+const ENDPOINT = "http://localhost:5001";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -35,7 +35,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     },
   };
   const { selectedChat, setSelectedChat, user, notification, setNotification } =
-ChatState();
+    ChatState();
 
   const fetchMessages = async () => {
     if (!selectedChat) return;
@@ -50,7 +50,7 @@ ChatState();
       setLoading(true);
 
       const { data } = await axios.get(
-        `http://localhost:5000/api/message/${selectedChat._id}`,
+        `http://localhost:5001/api/message/${selectedChat._id}`,
         config
       );
       setMessages(data);
@@ -84,7 +84,7 @@ ChatState();
         };
         setNewMessage("");
         const { data } = await axios.post(
-          "http://localhost:5000/api/message",
+          "http://localhost:5001/api/message",
           {
             content: newMessage,
             chatId: selectedChat,
@@ -229,13 +229,7 @@ ChatState();
               isRequired
               mt={3}
             >
-              {istyping ? (
-                <div>
-                  typing
-                </div>
-              ) : (
-                <></>
-              )}
+              {istyping ? <div>typing</div> : <></>}
               <Input
                 variant="filled"
                 bg="#E0E0E0"

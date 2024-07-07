@@ -40,9 +40,12 @@ const TaskAllocator = () => {
 
   const fetchTasks = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/tasks/my-tasks", config);
+      const { data } = await axios.get(
+        "http://localhost:5001/api/tasks/my-tasks",
+        config
+      );
       setTasks(data);
-      console.log("fetchtaks",data)
+      console.log("fetchtaks", data);
     } catch (error) {
       toast({
         title: "Error fetching tasks",
@@ -57,7 +60,7 @@ const TaskAllocator = () => {
   const allocateTask = async () => {
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/tasks/allocate",
+        "http://localhost:5001/api/tasks/allocate",
         { heading, description, email, workspaceId, attachments },
         config
       );
@@ -83,7 +86,7 @@ const TaskAllocator = () => {
   const updateTaskStatus = async () => {
     try {
       const { data } = await axios.patch(
-        "http://localhost:5000/api/tasks/update-status",
+        "http://localhost:5001/api/tasks/update-status",
         { taskId, status },
         config
       );
@@ -109,7 +112,7 @@ const TaskAllocator = () => {
   const addComment = async () => {
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/tasks/add-comment",
+        "http://localhost:5001/api/tasks/add-comment",
         { taskId, comment: comments },
         config
       );
@@ -140,7 +143,10 @@ const TaskAllocator = () => {
       </FormControl>
       <FormControl id="description" isRequired mt={4}>
         <FormLabel>Description</FormLabel>
-        <Textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+        <Textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
       </FormControl>
       <FormControl id="email" isRequired mt={4}>
         <FormLabel>Assignee Email</FormLabel>
@@ -148,11 +154,17 @@ const TaskAllocator = () => {
       </FormControl>
       <FormControl id="workspaceId" isRequired mt={4}>
         <FormLabel>Workspace ID</FormLabel>
-        <Input value={workspaceId} onChange={(e) => setWorkspaceId(e.target.value)} />
+        <Input
+          value={workspaceId}
+          onChange={(e) => setWorkspaceId(e.target.value)}
+        />
       </FormControl>
       <FormControl id="attachments" mt={4}>
         <FormLabel>Attachments</FormLabel>
-        <Input value={attachments} onChange={(e) => setAttachments(e.target.value.split(','))} />
+        <Input
+          value={attachments}
+          onChange={(e) => setAttachments(e.target.value.split(","))}
+        />
       </FormControl>
       <Button colorScheme="blue" mt={4} onClick={allocateTask}>
         Allocate Task
@@ -198,15 +210,26 @@ const TaskAllocator = () => {
           Fetch My Tasks
         </Button>
         <Box mt={4}>
-           {tasks?.map((task) => (
+          {tasks?.map((task) => (
             <Box key={task._id} p={4} shadow="md" borderWidth="1px" mt={2}>
-            
-              <p><strong>Heading:</strong> {task.heading}</p>
-              <p><strong>Description:</strong> {task.description}</p>
-              <p><strong>Status:</strong> {task.status}</p>
-              <p><strong>Assignee:</strong> {task.assignee.email}</p>
-              <p><strong>Created By:</strong> {task.createdBy.email}</p>
-              <p><strong>Comments:</strong></p>
+              <p>
+                <strong>Heading:</strong> {task.heading}
+              </p>
+              <p>
+                <strong>Description:</strong> {task.description}
+              </p>
+              <p>
+                <strong>Status:</strong> {task.status}
+              </p>
+              <p>
+                <strong>Assignee:</strong> {task.assignee.email}
+              </p>
+              <p>
+                <strong>Created By:</strong> {task.createdBy.email}
+              </p>
+              <p>
+                <strong>Comments:</strong>
+              </p>
               <ul>
                 {task.comments.map((comment, index) => (
                   <li key={index}>{comment.comment}</li>

@@ -25,18 +25,21 @@ const WorkspaceProvider = ({ children }) => {
     const fetchUserWorkspaces = async () => {
       if (user?.token) {
         try {
-          const response = await axios.get("http://localhost:5000/api/workspace/user", {
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-            },
-          });
+          const response = await axios.get(
+            "http://localhost:5001/api/workspace/user",
+            {
+              headers: {
+                Authorization: `Bearer ${user.token}`,
+              },
+            }
+          );
           setUserWorkspaces(response.data);
         } catch (error) {
           console.error("Failed to fetch user workspaces:", error);
         }
       }
     };
-  
+
     fetchUserWorkspaces();
   }, [user?.token]);
 

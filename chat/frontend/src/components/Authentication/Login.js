@@ -25,7 +25,7 @@ const Login = () => {
       toast({
         title: "Please Fill all the Feilds",
         status: "warning",
-        duration: 5000,
+        duration: 5001,
         isClosable: true,
         position: "bottom",
       });
@@ -41,7 +41,7 @@ const Login = () => {
       };
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/user/login",
+        "http://localhost:5001/api/user/login",
         { email, password },
         config
       );
