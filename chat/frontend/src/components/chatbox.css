@@ -1,0 +1,42 @@
+.my-chats-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.groupchat {
+  margin: 10px;
+
+  color: #000;
+
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.group-chat-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+}
+
+.messages-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 60px;
+  max-height: calc(100vh - 150px);
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+}
+
+.enteramsg {
+  width: calc(100% - 20px);
+  margin: 0 10px;
+}

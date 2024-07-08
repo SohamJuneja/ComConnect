@@ -1,6 +1,21 @@
+.messages-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 60px;
+  max-height: calc(100vh - 150px);
+}
+
 .messages {
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
-  scrollbar-width: none;
+}
+
+.enteramsg {
+  width: calc(100% - 20px);
+  margin: 0 10px;
+}
+.chatboxkiheight {
+  height: 50%;
+  width: 100%;
 }

@@ -10,7 +10,7 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import ProfileModal from "./miscellaneous/ProfileModal";
 import ScrollableChat from "./ScrollableChat";
 import animationData from "../animations/typing.json";
-
+import "./styles.css";
 import io from "socket.io-client";
 import UpdateGroupChatModal from "./miscellaneous/UpdateGroupChatModal";
 import { ChatState } from "../Context/ChatProvider";
@@ -126,7 +126,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   useEffect(() => {
     socket.on("message recieved", (newMessageRecieved) => {
       if (
-        !selectedChatCompare || // if chat is not selected or doesn't match current chat
+        !selectedChatCompare ||
         selectedChatCompare._id !== newMessageRecieved.chat._id
       ) {
         if (!notification.includes(newMessageRecieved)) {
@@ -167,11 +167,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           <Text
             fontSize={{ base: "28px", md: "30px" }}
             pb={3}
-            px={2}
-            w="100%"
+            px={3}
             fontFamily="Work sans"
             d="flex"
-            justifyContent={{ base: "space-between" }}
+            w="100%"
+            justifyContent="space-between"
             alignItems="center"
           >
             <IconButton
@@ -205,9 +205,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             p={3}
             bg="#E8E8E8"
             w="100%"
-            h="100%"
+            h="calc(100vh - 150px)" // Adjust height to fit the viewport
             borderRadius="lg"
-            overflowY="hidden"
+            overflow="hidden"
+            position="relative"
           >
             {loading ? (
               <Spinner
@@ -218,8 +219,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 margin="auto"
               />
             ) : (
-              <div className="messages">
-                <ScrollableChat messages={messages} />
+              <div className="messages-container">
+                <div className="messages">
+                  <ScrollableChat messages={messages} />
+                </div>
               </div>
             )}
 
@@ -228,14 +231,20 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               id="first-name"
               isRequired
               mt={3}
+              position="absolute"
+              bottom="0"
+              width="100%"
+              bg="#E8E8E8"
+              p={3}
             >
-              {istyping ? <div>typing</div> : <></>}
+              {istyping ? <div>typing...</div> : <></>}
               <Input
                 variant="filled"
                 bg="#E0E0E0"
                 placeholder="Enter a message.."
                 value={newMessage}
                 onChange={typingHandler}
+                className="enteramsg"
               />
             </FormControl>
           </Box>
