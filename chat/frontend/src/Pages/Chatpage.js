@@ -4,24 +4,49 @@ import Chatbox from "../components/Chatbox";
 import MyChats from "../components/MyChats";
 import SideDrawer from "../components/miscellaneous/SideDrawer";
 import { ChatState } from "../Context/ChatProvider";
-import Task from "../components/Task_allocator/task";
 import TaskAllocator from "../components/Task_allocator/task";
+
+import "./chat.css";
 
 const Chatpage = () => {
   const [fetchAgain, setFetchAgain] = useState(false);
   const { user } = ChatState();
+  const [isTaskAllocatorOpen, setIsTaskAllocatorOpen] = useState(false);
+
+  const toggleTaskAllocator = () => {
+    setIsTaskAllocatorOpen(!isTaskAllocatorOpen);
+  };
 
   return (
-    <div style={{ width: "100%" }}>
+    <div className="chats-sec" style={{ width: "100%" }}>
       {user && <SideDrawer />}
-      <Box d="flex" justifyContent="space-between" w="100%" h="91.5vh" p="10px">
-        {user && <MyChats fetchAgain={fetchAgain} />}
-        {user && (
-          <Chatbox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
+      <div className="chat-main">
+        <div
+          className={`task-allocator ${
+            isTaskAllocatorOpen ? "open" : "closed"
+          }`}
+        >
+          <TaskAllocator />
+          {isTaskAllocatorOpen && (
+            <button className="close-button" onClick={toggleTaskAllocator}>
+              &times;
+            </button>
+          )}
+        </div>
+        <div className={`sidebar ${isTaskAllocatorOpen ? "reduced" : "full"}`}>
+          {user && <MyChats fetchAgain={fetchAgain} />}
+        </div>
+        <div className={`chatting ${isTaskAllocatorOpen ? "reduced" : "full"}`}>
+          {user && (
+            <Chatbox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
+          )}
+        </div>
+        {!isTaskAllocatorOpen && (
+          <button className="toggle-button" onClick={toggleTaskAllocator}>
+            Allocate Task to the Groups
+          </button>
         )}
-       <TaskAllocator/>
-      </Box>
-      
+      </div>
     </div>
   );
 };

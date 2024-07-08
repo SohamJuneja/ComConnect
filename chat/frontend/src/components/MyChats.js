@@ -3,17 +3,18 @@ import { Box, Stack, Text, Button } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import { useToast } from "@chakra-ui/toast";
 import { ChatState } from "../Context/ChatProvider";
-import { useParams } from "react-router-dom"; 
+import { useParams } from "react-router-dom";
 import { fetchChats } from "../utils/api";
 import ChatLoading from "./ChatLoading";
 import GroupChatModal from "./miscellaneous/GroupChatModal";
 import { getSender } from "../config/ChatLogics";
+import "./chatbox.css";
 
 const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
   const { workspaceId } = useParams();
-  console.log("worspaceid", workspaceId)
+  console.log("worspaceid", workspaceId);
   const toast = useToast();
 
   const handleFetchChats = async () => {
@@ -23,7 +24,6 @@ const MyChats = ({ fetchAgain }) => {
       }
       const data = await fetchChats(user.token, workspaceId);
       setChats(data);
-    
     } catch (error) {
       toast({
         title: "Error Occurred!",
@@ -36,7 +36,7 @@ const MyChats = ({ fetchAgain }) => {
     }
   };
 
-  console.log("chats",chats);
+  console.log("chats", chats);
 
   useEffect(() => {
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
@@ -44,19 +44,24 @@ const MyChats = ({ fetchAgain }) => {
   }, [fetchAgain, workspaceId]);
 
   // Sort chats by chatName
-  const sortedChats = Array.isArray(chats) ? [...chats].sort((a, b) => a.chatName.length - b.chatName.length) : [];
+  const sortedChats = Array.isArray(chats)
+    ? [...chats].sort((a, b) => a.chatName.length - b.chatName.length)
+    : [];
 
   return (
     <Box
-      d={{ base: selectedChat ? "none" : "flex", md: "flex" }}
+      d="flex"
       flexDir="column"
       alignItems="center"
       p={3}
       bg="white"
-      w={{ base: "100%", md: "31%" }}
+      w="100%"
+      h="calc(100vh - 100px)" // Adjust height to fit the viewport
       borderRadius="lg"
       borderWidth="1px"
+      className="my-chats-container"
     >
+      <Button className="groupchat">My Chats</Button>
       <Box
         pb={3}
         px={3}
@@ -67,12 +72,13 @@ const MyChats = ({ fetchAgain }) => {
         justifyContent="space-between"
         alignItems="center"
       >
-        My Chats
         <GroupChatModal>
           <Button
             d="flex"
             fontSize={{ base: "17px", md: "10px", lg: "17px" }}
             rightIcon={<AddIcon />}
+            textAlign={"center"}
+            className="groupchatbtn"
           >
             New Group Chat
           </Button>
@@ -86,40 +92,41 @@ const MyChats = ({ fetchAgain }) => {
         w="100%"
         h="100%"
         borderRadius="lg"
-        overflowY="hidden"
+        overflowY="auto"
+        className="group-chat-content"
       >
-      {Array.isArray(chats) ? (
-  <Stack overflowY="scroll">
-    {sortedChats.map((chat) => (
-      <Box
-        onClick={() => setSelectedChat(chat)}
-        cursor="pointer"
-        bg={selectedChat === chat ? "#38B2AC" : "#E8E8E8"}
-        color={selectedChat === chat ? "white" : "black"}
-        px={3}
-        py={2}
-        borderRadius="lg"
-        key={chat._id}
-      >
-        <Text>
-          {!chat.isGroupChat
-            ? getSender(loggedUser, chat.users)
-            : chat.chatName}
-        </Text>
-        {chat.latestMessage && (
-          <Text fontSize="xs">
-            <b>{chat.latestMessage.sender.name} : </b>
-            {chat.latestMessage.content.length > 50
-              ? chat.latestMessage.content.substring(0, 51) + "..."
-              : chat.latestMessage.content}
-          </Text>
+        {Array.isArray(chats) ? (
+          <Stack overflowY="scroll">
+            {sortedChats.map((chat) => (
+              <Box
+                onClick={() => setSelectedChat(chat)}
+                cursor="pointer"
+                bg={selectedChat === chat ? "#38B2AC" : "#E8E8E8"}
+                color={selectedChat === chat ? "white" : "black"}
+                px={3}
+                py={2}
+                borderRadius="lg"
+                key={chat._id}
+              >
+                <Text>
+                  {!chat.isGroupChat
+                    ? getSender(loggedUser, chat.users)
+                    : chat.chatName}
+                </Text>
+                {chat.latestMessage && (
+                  <Text fontSize="xs">
+                    <b>{chat.latestMessage.sender.name} : </b>
+                    {chat.latestMessage.content.length > 50
+                      ? chat.latestMessage.content.substring(0, 51) + "..."
+                      : chat.latestMessage.content}
+                  </Text>
+                )}
+              </Box>
+            ))}
+          </Stack>
+        ) : (
+          <ChatLoading />
         )}
-      </Box>
-    ))}
-  </Stack>
-) : (
-  <ChatLoading />
-)}
       </Box>
     </Box>
   );
