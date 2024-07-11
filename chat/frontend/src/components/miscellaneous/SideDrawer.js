@@ -87,7 +87,7 @@ function SideDrawer() {
 
       setLoading(false);
       setSearchResult(data);
-    } catch (error) {
+    } catch ( error) {
       toast({
         title: "Error Occured!",
         description: "Failed to Load the Search Results",
@@ -95,7 +95,7 @@ function SideDrawer() {
         duration: 5000,
         isClosable: true,
         position: "bottom-left",
-      });
+      }); 
     }
   };
 
