@@ -31,6 +31,8 @@ import { getSender } from "../../config/ChatLogics";
 import UserListItem from "../userAvatar/UserListItem";
 import { ChatState } from "../../Context/ChatProvider";
 
+import "./ek.css"; // Import the CSS file
+
 function SideDrawer() {
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
@@ -143,7 +145,8 @@ function SideDrawer() {
         bg="white"
         w="100%"
         p="5px 10px 5px 10px"
-        borderWidth="5px"
+      
+        bg=""
       >
         <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
           <Button variant="ghost" onClick={onOpen}>
@@ -153,7 +156,7 @@ function SideDrawer() {
             </Text>
           </Button>
         </Tooltip>
-        <Text fontSize="2xl" fontFamily="Work sans">
+        <Text fontSize="3xl" fontFamily="Work sans" textAlign="center" flex="1" className="animated-text">
           COMCONNECT
         </Text>
         <div>

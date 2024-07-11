@@ -9,14 +9,14 @@
   display: flex;
   height: 100%;
   position: relative;
-  /* overflow-y: hidden; */
+  background-color: 	#d896ff !important;
 }
 
 .task-allocator {
   width: 0;
-  border-right: 1px solid #ddd;
+ 
   overflow-y: auto;
-  background-color: #f8f9fa;
+  background-color: #edecec;
   transition: width 0.3s ease;
   position: relative;
 }
@@ -24,12 +24,11 @@
 .task-allocator.open {
   width: 20%;
 }
-
 .toggle-button {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-color: #007bff;
+  background-color: #821682;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -38,11 +37,44 @@
   z-index: 1;
   font-size: 16px;
   font-weight: bold;
-  transition: background-color 0.3s ease;
+  overflow: hidden;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.toggle-button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.5s ease;
+}
+
+.toggle-button:hover::before {
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .toggle-button:hover {
-  background-color: #0056b3;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #821682;
+    transform: scale(1);
+  }
+  50% {
+    background-color: #993399;
+    transform: scale(1.05);
+  }
+  100% {
+    background-color: #821682;
+    transform: scale(1);
+  }
 }
 
 .close-button {
@@ -63,9 +95,9 @@
 }
 
 .sidebar {
-  border-right: 1px solid #ddd;
+  
   overflow-y: auto;
-  background-color: #f8f9fa;
+  
   transition: width 0.3s ease;
 }
 
@@ -81,8 +113,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #ffffff;
-  border-left: 1px solid #ddd;
+  background-color: 	#d896ff !important;
+  
   padding: 10px;
   transition: width 0.3s ease;
 }
