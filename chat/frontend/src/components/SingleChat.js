@@ -205,7 +205,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             p={3}
             bg="#efbbff; "
             w="100%"
-            h="calc(100vh - 150px)" // Adjust height to fit the viewport
+            h="calc(100vh - 220px)" // Adjust height to fit the viewport
             borderRadius="lg"
             overflow="hidden"
             position="relative"
