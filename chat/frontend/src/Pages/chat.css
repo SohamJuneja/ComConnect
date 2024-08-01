@@ -24,6 +24,9 @@
 .task-allocator.open {
   width: 20%;
 }
+
+
+
 .toggle-button {
   position: absolute;
   top: 10px;
@@ -39,6 +42,15 @@
   font-weight: bold;
   overflow: hidden;
   transition: background-color 0.3s ease, transform 0.3s ease;
+  white-space: normal; 
+}
+
+@media (max-width: 600px) {
+  .toggle-button {
+    top: 5px;
+    padding: 5px 10px;
+    font-size: 10px;
+  }
 }
 
 .toggle-button::before {

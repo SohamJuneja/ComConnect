@@ -93,6 +93,16 @@
     transform: scale(1);
   }
 }
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+  .groupchat {
+    padding: 8px 16px;
+    top:10px;
+    font-size: 10px !important;
+  }
+}
+
 .groupchat {
   background-color: #821682 !important;
   color: white !important;
