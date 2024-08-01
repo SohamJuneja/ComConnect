@@ -56,7 +56,7 @@ const MyChats = ({ fetchAgain }) => {
       p={3}
       bg="white"
       w="100%"
-      h="calc(100vh - 100px)" // Adjust height to fit the viewport
+      h="calc(100vh - 120px)" // Adjust height to fit the viewport
       borderRadius="lg"
       borderWidth="1px"
       className="my-chats-container"
@@ -88,7 +88,6 @@ const MyChats = ({ fetchAgain }) => {
         d="flex"
         flexDir="column"
         p={3}
-       
         w="100%"
         h="100%"
         borderRadius="lg"
