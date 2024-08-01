@@ -157,11 +157,11 @@ const CreateWorkspaceModal = ({ onClose }) => {
                     }
                   }}
                 />
-                <ul>
+                <ol className="iskima">
                   {roles.map((role, index) => (
                     <li key={index}>{role}</li>
                   ))}
-                </ul>
+                </ol>
               </div>
               <div className="workspace_btn">
                 <button onClick={createWorkspace}>Next</button>
