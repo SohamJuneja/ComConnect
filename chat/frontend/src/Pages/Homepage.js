@@ -29,7 +29,7 @@ function Homepage() {
         <Box className="left-box translucent-box">
           <Box d="flex" justifyContent="center" p={3}>
             <Text fontSize="4xl" fontFamily="Work sans">
-              Talk-A-Tive
+             COMCONNECT
             </Text>
           </Box>
           <Box p={4}>
