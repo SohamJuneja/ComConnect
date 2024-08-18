@@ -6,6 +6,8 @@ import { ChakraProvider } from "@chakra-ui/react";
 import ChatProvider from "./Context/ChatProvider";
 import WorkspaceSelection from "./components/workspace/WorkspaceSelection";
 import WorkspaceProvider from "./Context/WorkspaceProvider";
+import TaskAllocatorPage from "./components/task_allocator/TaskAllocatorPage";
+import MyTasks from "./components/task_allocator/MyTasks";
 
 const App = () => {
   return (
@@ -15,10 +17,12 @@ const App = () => {
           <WorkspaceProvider>
             <div className="container">
               <Routes>
-                <Route path="/" element={<Homepage />} exact />
+                <Route path="/" element={<Homepage />} />
+                <Route path="/tasks/:workspaceId" element={<TaskAllocatorPage />} /> {/* Updated route */}
+                <Route path="/my-tasks" element={<MyTasks />} />
                 <Route path="/chats" element={<Chatpage />} />
                 <Route path="/workspace" element={<WorkspaceSelection />} />
-                <Route path="/workspace/:workspaceId/chats" element={<Chatpage />} /> {/* Add this route */}
+                <Route path="/workspace/:workspaceId/chats" element={<Chatpage />} />
               </Routes>
             </div>
           </WorkspaceProvider>

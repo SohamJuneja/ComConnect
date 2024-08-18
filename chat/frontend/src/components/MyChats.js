@@ -3,7 +3,7 @@ import { Box, Stack, Text, Button } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import { useToast } from "@chakra-ui/toast";
 import { ChatState } from "../Context/ChatProvider";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { fetchChats } from "../utils/api";
 import ChatLoading from "./ChatLoading";
 import GroupChatModal from "./miscellaneous/GroupChatModal";
@@ -14,8 +14,8 @@ const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
   const { workspaceId } = useParams();
-  console.log("worspaceid", workspaceId);
   const toast = useToast();
+  const navigate = useNavigate();
 
   const handleFetchChats = async () => {
     try {
@@ -36,14 +36,11 @@ const MyChats = ({ fetchAgain }) => {
     }
   };
 
-  console.log("chats", chats);
-
   useEffect(() => {
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     handleFetchChats();
   }, [fetchAgain, workspaceId]);
 
-  // Sort chats by chatName
   const sortedChats = Array.isArray(chats)
     ? [...chats].sort((a, b) => a.chatName.length - b.chatName.length)
     : [];
@@ -56,7 +53,7 @@ const MyChats = ({ fetchAgain }) => {
       p={3}
       bg="white"
       w="100%"
-      h="calc(100vh - 120px)" // Adjust height to fit the viewport
+      h="calc(100vh - 120px)"
       borderRadius="lg"
       borderWidth="1px"
       className="my-chats-container"
@@ -83,6 +80,16 @@ const MyChats = ({ fetchAgain }) => {
             New Group Chat
           </Button>
         </GroupChatModal>
+
+        <Button
+          d="flex"
+          fontSize={{ base: "17px", md: "10px", lg: "17px" }}
+          textAlign={"center"}
+          className="taskbtn"
+          onClick={() => navigate(`/tasks/${workspaceId}`)} // Pass workspaceId in the URL
+        >
+          Go to Tasks
+        </Button>
       </Box>
       <Box
         d="flex"
