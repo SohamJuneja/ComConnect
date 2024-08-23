@@ -92,13 +92,14 @@ const CreateWorkspaceModal = ({ onClose }) => {
 
   const [showPopup, setShowPopup] = useState(false);
 
-  // const handleCreateWorkspace = () => {
-  //   setShowPopup(true);
-  // };
   const [showCreateWorkspace, setShowCreateWorkspace] = useState(false);
 
   const handleCreateWorkspace = () => {
     setShowCreateWorkspace(true);
+  };
+
+  const handleClose = () => {
+    setShowCreateWorkspace(false);
   };
 
   return (
@@ -135,77 +136,92 @@ const CreateWorkspaceModal = ({ onClose }) => {
           <img className="workspace_img" src={workspace} alt="workspace" />
         </div>
       </div>
-      <div className="modal">
-        <div className="modal_content">
-          {showCreateWorkspace && (
-            <div>
-              <h2>Create Workspace</h2>
-              <div className="workspace_holder">
-                <input
-                  type="text"
-                  placeholder="Workspace Name"
-                  value={workspaceName}
-                  onChange={(e) => setWorkspaceName(e.target.value)}
-                />
-                <input
-                  type="text"
-                  placeholder="Add Role"
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      setRoles([...roles, e.target.value]);
-                      e.target.value = "";
-                    }
-                  }}
-                />
-                <ol className="iskima">
-                  {roles.map((role, index) => (
-                    <li key={index}>{role}</li>
-                  ))}
-                </ol>
-              </div>
-              <div className="workspace_btn">
-                <button onClick={createWorkspace}>Next</button>
-              </div>
-            </div>
-          )}
-
-          {step === 2 && (
-            <div>
-              <h2>Invite Users</h2>
-              <ul>
-                {roleList.map((role, index) => (
-                  <li key={index}>
-                    {role.roleName}{" "}
-                    <button onClick={() => setSelectedRole(role.roleName)}>
-                      Invite
-                    </button>
-                  </li>
-                ))}
-              </ul>
-              {selectedRole && (
+      {showCreateWorkspace && (
+        <div className="modal_background">
+          <div className="modal">
+            <div className="modal_content">
+              {step === 1 && (
                 <div>
-                  <h3>Invite Users to {selectedRole}</h3>
-                  <input
-                    type="text"
-                    placeholder="Enter emails separated by commas"
-                    value={emails}
-                    onChange={(e) => setEmails(e.target.value)}
-                  />
-                  <button onClick={inviteUsers}>Send Invitations</button>
+                  <h2>Create Workspace</h2>
+                  <div className="workspace_holder">
+                    <div className="input-group">
+                      <label htmlFor="workspaceName">Workspace Name</label>
+                      <input
+                        id="workspaceName"
+                        type="text"
+                        placeholder="Workspace Name"
+                        value={workspaceName}
+                        onChange={(e) => setWorkspaceName(e.target.value)}
+                      />
+                    </div>
+                    <div className="input-group">
+                      <label htmlFor="addRole">Add Role</label>
+                      <input
+                        id="addRole"
+                        type="text"
+                        placeholder="Add Role"
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            setRoles([...roles, e.target.value]);
+                            e.target.value = "";
+                          }
+                        }}
+                      />
+                    </div>
+                    <div className="input-group">
+                      <label>Role List</label>
+                      <div className="role-container">
+                        <ol className="iskima">
+                          {roles.map((role, index) => (
+                            <li className="role-item" key={index}>
+                              {role}
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="workspace_btn">
+                    <button onClick={createWorkspace}>Next</button>
+                  </div>
+                </div>
+              )}
+
+              {step === 2 && (
+                <div>
+                  <h2>Invite Users</h2>
+                  <ul>
+                    {roleList.map((role, index) => (
+                      <li key={index}>
+                        {role.roleName}{" "}
+                        <button onClick={() => setSelectedRole(role.roleName)}>
+                          Invite
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                  {selectedRole && (
+                    <div>
+                      <h3>Invite Users to {selectedRole}</h3>
+                      <input
+                        type="text"
+                        placeholder="Enter emails separated by commas"
+                        value={emails}
+                        onChange={(e) => setEmails(e.target.value)}
+                      />
+                      <button onClick={inviteUsers}>Send Invitations</button>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
-          )}
-        </div>
-        <div className="modal_button">
-          {showCreateWorkspace && (
-            <>
-              <button onClick={onClose}>Close</button>
+            <div className="modal_button">
+              <button onClick={handleClose}>Close</button>
               <button onClick={handleDone}>Done</button>
-            </>
-          )}
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
