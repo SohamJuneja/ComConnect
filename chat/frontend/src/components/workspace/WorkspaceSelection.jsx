@@ -1,10 +1,11 @@
 import React from "react";
-import { Box, Button, VStack } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import { useWorkspace } from "../../Context/WorkspaceProvider";
 import { useNavigate } from "react-router-dom";
-import CreateWorkspaceModal from "./CreateWorkspaceModal";
-import JoinWorkspaceModal from "./JoinWorkspaceModal";
+import CreateWorkspaceModal from "./CreateWorkspaceModal"; // Add this import
+
 import "./workspace.css";
+
 const WorkspaceSelection = () => {
   const { userWorkspaces, setUserWorkspaces } = useWorkspace();
   console.log("workspaces", userWorkspaces);
@@ -13,7 +14,7 @@ const WorkspaceSelection = () => {
   const handleSelectWorkspace = (workspace) => {
     setUserWorkspaces(workspace);
     let workspaceId = workspace._id;
-    console.log("worksapce_id",workspace._id);
+    console.log("worksapce_id", workspace._id);
     navigate(`/workspace/${workspaceId}/chats`);
   };
 
@@ -22,15 +23,13 @@ const WorkspaceSelection = () => {
       <div className="workspace_lol">
         <CreateWorkspaceModal>Create Workspace</CreateWorkspaceModal>
       </div>
-
       <div className="join_workspace_modal">
+        <div className="join_workspace_btn">Join Workspace</div>
         <div className="join_workspace_lol">
-          <JoinWorkspaceModal>
-            <div className="join_workspace_btn">Join Workspace</div>
-          </JoinWorkspaceModal>
           {Array.isArray(userWorkspaces) && userWorkspaces.length > 0 ? (
             userWorkspaces.map((workspace) => (
               <Button
+                className="cnt"
                 key={workspace._id}
                 onClick={() => handleSelectWorkspace(workspace)}
               >
