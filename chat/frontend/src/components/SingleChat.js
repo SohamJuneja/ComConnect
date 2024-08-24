@@ -134,10 +134,15 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           setFetchAgain(!fetchAgain);
         }
       } else {
-        setMessages([...messages, newMessageRecieved]);
+        setMessages((prevMessages) => [...prevMessages, newMessageRecieved]);
       }
     });
-  });
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      socket.off("message recieved");
+    };
+  }, [selectedChat, notification, fetchAgain]);
 
   const typingHandler = (e) => {
     setNewMessage(e.target.value);
