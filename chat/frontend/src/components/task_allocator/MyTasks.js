@@ -21,7 +21,7 @@ const MyTasks = () => {
   const fetchMyTasks = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:5001/api/tasks/my-tasks",
+        "https://comconnect-backend.onrender.com/api/tasks/my-tasks",
         config
       );
       setTasks(data);

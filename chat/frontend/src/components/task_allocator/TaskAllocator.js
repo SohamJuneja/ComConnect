@@ -34,7 +34,7 @@ const TaskAllocator = ({ workspaceId }) => {
   const fetchTasks = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:5001/api/tasks/my-tasks?workspaceId=${workspaceId}`,
+        `https://comconnect-backend.onrender.com/api/tasks/my-tasks?workspaceId=${workspaceId}`,
         config
       );
       setTasks(data);
@@ -58,7 +58,7 @@ const TaskAllocator = ({ workspaceId }) => {
   const allocateTask = async () => {
     try {
       const { data } = await axios.post(
-        "http://localhost:5001/api/tasks/allocate",
+        "https://comconnect-backend.onrender.com/api/tasks/allocate",
         { heading, description, email, workspaceId, attachments },
         config
       );

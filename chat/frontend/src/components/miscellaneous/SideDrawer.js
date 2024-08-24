@@ -80,7 +80,7 @@ function SideDrawer() {
       };
 
       const { data } = await axios.get(
-        `http://localhost:5001/api/user?search=${search}`,
+        `https://comconnect-backend.onrender.com/api/user?search=${search}`,
         config
       );
       console.log("search", data);
@@ -115,7 +115,7 @@ function SideDrawer() {
 
       // Include workspaceId in the request body
       const { data } = await axios.post(
-        `http://localhost:5001/api/chat`,
+        `https://comconnect-backend.onrender.com/api/chat`,
         { userId, workspaceId },
         config
       );
@@ -145,8 +145,7 @@ function SideDrawer() {
         bg="white"
         w="100%"
         p="5px 10px 5px 10px"
-      
-        bg=""
+    
       >
         <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
           <Button variant="ghost" onClick={onOpen}>

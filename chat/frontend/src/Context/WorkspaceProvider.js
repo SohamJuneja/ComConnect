@@ -26,7 +26,7 @@ const WorkspaceProvider = ({ children }) => {
       if (user?.token) {
         try {
           const response = await axios.get(
-            "http://localhost:5001/api/workspace/user",
+            "https://comconnect-backend.onrender.com/api/workspace/user",
             {
               headers: {
                 Authorization: `Bearer ${user.token}`,

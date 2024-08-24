@@ -25,7 +25,7 @@ const TaskCard = ({ task, fetchTasks, config, onClick }) => {
   const updateTaskStatus = async () => {
     try {
       await axios.patch(
-        "http://localhost:5001/api/tasks/update-status",
+        "https://comconnect-backend.onrender.com/api/tasks/update-status",
         { taskId: task._id, status: newStatus },
         config
       );
@@ -38,7 +38,7 @@ const TaskCard = ({ task, fetchTasks, config, onClick }) => {
   const addComment = async () => {
     try {
       await axios.post(
-        "http://localhost:5001/api/tasks/add-comment",
+        "https://comconnect-backend.onrender.com/api/tasks/add-comment",
         { taskId: task._id, comment },
         config
       );

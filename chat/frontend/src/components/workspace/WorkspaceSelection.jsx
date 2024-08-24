@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import CreateWorkspaceModal from "./CreateWorkspaceModal"; // Add this import
 
 import "./workspace.css";
+import JoinWorkspaceModal from "./JoinWorkspaceModal";
 
 const WorkspaceSelection = () => {
   const { userWorkspaces, setUserWorkspaces } = useWorkspace();
@@ -24,7 +25,9 @@ const WorkspaceSelection = () => {
         <CreateWorkspaceModal>Create Workspace</CreateWorkspaceModal>
       </div>
       <div className="join_workspace_modal">
-        <div className="join_workspace_btn">Join Workspace</div>
+      <JoinWorkspaceModal>
+            <div className="join_workspace_btn">Join Workspace</div>
+          </JoinWorkspaceModal>
         <div className="join_workspace_lol">
           {Array.isArray(userWorkspaces) && userWorkspaces.length > 0 ? (
             userWorkspaces.map((workspace) => (
