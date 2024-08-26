@@ -16,6 +16,7 @@
   margin: 0 10px;
 }
 .chatboxkiheight {
+  background-color: #efbbff !important;
   height: calc(100vh - 120px);
   width: 100%;
 }

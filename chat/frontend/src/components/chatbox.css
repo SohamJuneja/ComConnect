@@ -1,10 +1,20 @@
+
+
 .my-chats-container {
+ 
+ 
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: var(--chakra-space-3);
+  background: #d896ff !important;
+  width: 100%;
+  height: calc(100vh - 120px);
+  border-radius: var(--chakra-radii-lg);
+  border: 1px solid white;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  overflow: hidden;
-  background-color: 	#d896ff !important;
-  
 }
 
 .groupchat {
@@ -17,12 +27,19 @@
 }
 
 .group-chat-content {
-  flex-grow: 1;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  border-radius: var(--chakra-radii-lg);
   overflow-y: auto;
+  padding: var(--chakra-space-3);
+  flex-grow: 1;
+
   overflow-x: hidden;
-  padding: 10px;
- background-color: #efbbff; 
-  border-radius: 5px;
+
+  background-color: #efbbff;
+ 
 }
 
 .messages-container {
