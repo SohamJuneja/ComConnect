@@ -1,3 +1,4 @@
+
 .chats-sec {
   display: flex;
   flex-direction: column;
@@ -7,27 +8,30 @@
 
 .chat-main {
   display: flex;
-  height: 100vh;
-  position: relative;
+  height: 90%;
   background-color: #d896ff !important;
 }
 
 .sidebar {
-  width: 20%;
 
-  overflow-y: auto;
-  background-color: #edecec;
+
+  background: #d896ff !important;
+  overflow: hidden;
+  height: 100%;
+  width: 20%;
   transition: width 0.3s ease;
+  padding: 10px;
 }
 
 .chatting {
-  width: 80%;
+  
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #d896ff !important;
   padding: 10px;
   transition: width 0.3s ease;
+  width: 80%;
+  background-color: #d896ff !important;
 }
 
 .task-allocator {
