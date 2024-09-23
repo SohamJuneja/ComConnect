@@ -21,10 +21,10 @@
         "dest": "frontend/build/$1"
       }
     ],
-    "env": {
-      "DB_USERNAME": "akshanshkaushal9",
-      "DB_PASSWORD": "GRS7yWeIDcF8SEMQ",
-      "JWT_SECRET": "comconnectchat",
-      "NODE_ENV": "production"
-    }
+   "env": {
+  "DB_USERNAME": "@db_username",
+  "DB_PASSWORD": "@db_password",
+  "JWT_SECRET": "@jwt_secret",
+  "NODE_ENV": "@node_env"
+}
   }
