@@ -51,7 +51,7 @@ const Signup = () => {
         },
       };
       const { data } = await axios.post(
-        "https://comconnect-backend.onrender.com/api/user",
+        "/api/user",
         {
           name,
           email,

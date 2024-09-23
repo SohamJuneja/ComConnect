@@ -58,7 +58,7 @@ const GroupChatModal = ({ children }) => {
         },
       };
       const { data } = await axios.get(
-        `https://comconnect-backend.onrender.com/api/user?search=${search}&workspaceId=${workspaceId}`,
+        `/api/user?search=${search}&workspaceId=${workspaceId}`,
         config
       );
       setLoading(false);
@@ -101,7 +101,7 @@ const GroupChatModal = ({ children }) => {
           },
         };
         const { data } = await axios.post(
-          `https://comconnect-backend.onrender.com/api/chat/group`,
+          `/api/chat/group`,
           {
             name: groupChatName,
             users: JSON.stringify(selectedUsers.map((u) => u._id)),

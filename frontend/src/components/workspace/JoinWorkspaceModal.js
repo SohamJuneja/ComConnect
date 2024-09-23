@@ -44,7 +44,7 @@ const JoinWorkspaceModal = ({ children }) => {
             return;
           }
 
-          const url = `https://comconnect-backend.onrender.com/api/workspace/${workspaceId}/groups`;
+          const url = `/api/workspace/${workspaceId}/groups`;
           const { data } = await axios.get(url, config);
           setGroups(data);
         } catch (error) {
@@ -77,7 +77,7 @@ const JoinWorkspaceModal = ({ children }) => {
       }
 
       const { data } = await axios.post(
-        "https://comconnect-backend.onrender.com/api/workspace/join",
+        "/api/workspace/join",
         { workspaceId, groupId },
         config
       );

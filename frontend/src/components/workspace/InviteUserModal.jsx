@@ -41,7 +41,7 @@ const InviteUserModal = ({ roleId }) => {
       };
 
       await axios.post(
-        `https://comconnect-backend.onrender.com/api/workspace/${selectedWorkspace._id}/invite`,
+        `/api/workspace/${selectedWorkspace._id}/invite`,
         { email, roleId },
         config
       );

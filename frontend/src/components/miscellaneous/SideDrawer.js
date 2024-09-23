@@ -80,7 +80,7 @@ function SideDrawer() {
       };
 
       const { data } = await axios.get(
-        `https://comconnect-backend.onrender.com/api/user?search=${search}`,
+        `/api/user?search=${search}`,
         config
       );
       console.log("search", data);
@@ -115,7 +115,7 @@ function SideDrawer() {
 
       // Include workspaceId in the request body
       const { data } = await axios.post(
-        `https://comconnect-backend.onrender.com/api/chat`,
+        `/api/chat`,
         { userId, workspaceId },
         config
       );

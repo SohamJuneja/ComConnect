@@ -11,7 +11,7 @@ const path = require("path");
 const Connection = require("./config/db");
 const cors = require("cors");
 
-dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 const app = express();
 app.use(cors());
@@ -30,6 +30,22 @@ app.use("/api/message", messageRoutes);
 app.use("/api/workspace", workspaceRoutes);
 app.use("/api/tasks", taskRoutes);
 
+// deployment-->
+const __dirname1 = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname1, "/frontend/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running..");
+  });
+}
+//--->
+
 // Error Handling middlewares
 app.use(notFound);
 app.use(errorHandler);
@@ -42,8 +58,8 @@ const server = app.listen(
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: "http://localhost:3000",
-    // credentials: true,
+    origin: 'http://localhost:3000',
+    credentials: true,
   },
 });
 

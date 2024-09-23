@@ -23,7 +23,7 @@ const CreateWorkspaceModal = ({ onClose }) => {
   const createWorkspace = async () => {
     try {
       const response = await axios.post(
-        "https://comconnect-backend.onrender.com/api/workspace",
+        "/api/workspace",
         { name: workspaceName, roles },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -38,7 +38,7 @@ const CreateWorkspaceModal = ({ onClose }) => {
   const fetchRoles = async () => {
     try {
       const response = await axios.get(
-        `https://comconnect-backend.onrender.com/api/workspace/${workspaceId}/roles`,
+        `/api/workspace/${workspaceId}/roles`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
