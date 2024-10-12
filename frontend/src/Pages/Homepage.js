@@ -12,7 +12,11 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Login from "../components/Authentication/Login";
 import Signup from "../components/Authentication/Signup";
-import './home.css';
+import "./home.css";
+import Wave from "../components/Elements/wave";
+import Spring from "../components/Elements/spring";
+import BackgroundComponent from "../components/Elements/background";
+import Text_Box from "../components/Elements/text_box";
 
 function Homepage() {
   const navigate = useNavigate();
@@ -24,36 +28,47 @@ function Homepage() {
   }, [navigate]);
 
   return (
-    <Container maxW="5xl" centerContent className="container">
-      <Box className="content-box">
-        <Box className="left-box translucent-box">
-          <Box d="flex" justifyContent="center" p={3}>
-            <Text fontSize="4xl" fontFamily="Work sans">
-             COMCONNECT
-            </Text>
-          </Box>
-          <Box p={4}>
+    <BackgroundComponent>
+<Box
+        d="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        height="100vh">
+        <Box p={2} width="100%" className="container" >
+          <Box className="left-box" flex="1" display="flex" flexDirection="column" bottom="0px">
+            <Box position="relative" mb="0px">
+              <Text
+                fontFamily="Inter"
+                fontWeight="700"
+                lineHeight={{ base: "40px", md: "55px", lg: "66.65px" }}
+                fontSize={{ base: "24px", md: "34px", lg: "44.43px" }}
+                textAlign="left"
+                color="#FAFAFC"
+                mb={{ base: "4px", md: "6px", lg: "8px" }}
+              >
+                Hey, <br />
+                Welcome Back!
+              </Text>
+            </Box>
+            <Box position="relative" mt="0px">
+              <Text_Box children="We are very happy to see you again!" />
+            </Box>
+
             <Tabs isFitted variant="soft-rounded">
-              <TabList mb="1em">
-                <Tab>Login</Tab>
-                <Tab>Sign Up</Tab>
-              </TabList>
               <TabPanels>
                 <TabPanel>
                   <Login />
                 </TabPanel>
-                <TabPanel>
-                  <Signup />
-                </TabPanel>
               </TabPanels>
             </Tabs>
           </Box>
-        </Box>
-        <Box className="right-box">
-          <img src="https://herobot.app/wp-content/uploads/2022/11/11-Reasons-Why-A-Chat-Application-Is-Great-For-Business_1.jpg" alt="Decorative" className="right-image" />
+          <Box className="right-box">
+            <img src="images/Frame.png" alt="Decorative" padding="auto"/>
+          </Box>
         </Box>
       </Box>
-    </Container>
+    </BackgroundComponent>
   );
 }
 
