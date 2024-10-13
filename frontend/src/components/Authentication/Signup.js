@@ -6,6 +6,7 @@ import { useToast } from "@chakra-ui/toast";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Text_Box from "../Elements/text_box";
 
 const Signup = () => {
   const [show, setShow] = useState(false);
@@ -132,24 +133,33 @@ const Signup = () => {
   return (
     <VStack spacing="5px">
       <FormControl id="first-name" isRequired>
-        <FormLabel>Name</FormLabel>
+        <FormLabel display="inline-flex">
+          <Text_Box children={"Name"} /></FormLabel>
         <Input
+           bg="white"
+            color="black"
           placeholder="Enter Your Name"
           onChange={(e) => setName(e.target.value)}
         />
       </FormControl>
       <FormControl id="email" isRequired>
-        <FormLabel>Email Address</FormLabel>
+      <FormLabel display="inline-flex">
+      <Text_Box children={"Email"} /></FormLabel>
         <Input
+           bg="white"
+            color="black"
           type="email"
           placeholder="Enter Your Email Address"
           onChange={(e) => setEmail(e.target.value)}
         />
       </FormControl>
       <FormControl id="password" isRequired>
-        <FormLabel>Password</FormLabel>
+      <FormLabel display="inline-flex">
+      <Text_Box children={"Password"} /></FormLabel>
         <InputGroup size="md">
           <Input
+             bg="white"
+            color="black"
             type={show ? "text" : "password"}
             placeholder="Enter Password"
             onChange={(e) => setPassword(e.target.value)}
@@ -161,12 +171,15 @@ const Signup = () => {
           </InputRightElement>
         </InputGroup>
       </FormControl>
-      <FormControl id="password" isRequired>
-        <FormLabel>Confirm Password</FormLabel>
+      <FormControl id="confirm-password" isRequired>
+      <FormLabel display="inline-flex">
+      <Text_Box children={"Confirm Password"} /></FormLabel>
         <InputGroup size="md">
           <Input
             type={show ? "text" : "password"}
             placeholder="Confirm password"
+            bg="white"
+            color="black"
             onChange={(e) => setConfirmpassword(e.target.value)}
           />
           <InputRightElement width="4.5rem">
@@ -177,16 +190,22 @@ const Signup = () => {
         </InputGroup>
       </FormControl>
       <FormControl id="pic">
-        <FormLabel>Upload your Picture</FormLabel>
+      <FormLabel display="inline-flex">
+      <Text_Box children={"Upload Your Picture"} /></FormLabel>
         <Input
+          bg="white"
           type="file"
           p={1.5}
           accept="image/*"
           onChange={(e) => postDetails(e.target.files[0])}
+          
+          
         />
+        
       </FormControl>
       <Button
-        colorScheme="blue"
+        bg="#FBB03B"
+        color="#04539D"
         width="100%"
         style={{ marginTop: 15 }}
         onClick={submitHandler}

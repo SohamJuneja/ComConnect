@@ -9,6 +9,8 @@ import WorkspaceProvider from "./Context/WorkspaceProvider";
 import TaskAllocatorPage from "./components/task_allocator/TaskAllocatorPage";
 import MyTasks from "./components/task_allocator/MyTasks";
 
+import Signup from "./components/Authentication/Signup";
+
 const App = () => {
   return (
     <Router>
