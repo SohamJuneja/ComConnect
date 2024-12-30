@@ -115,25 +115,28 @@ const CreateWorkspaceModal = ({ onClose }) => {
         <div className="workspace_content">
           <div className="workspace_content_heading">
             Create a new ComConnect Workspace
+
+            
+              <button
+                className="create_workspace_btn"
+                onClick={handleCreateWorkspace}
+              >
+                Create Workspace
+              </button>
+          
           </div>
+          
           <div className="workspace_content_description">
             Introducing ComConnect: Revolutionizing college communities by
             connecting students, allocating roles based on preferences, and
             creating teams that feel like family. Empower collaboration and
             enhance productivity with comConnect! to create a workspace click on
             the button below
-            <div className="create_workspace_btn_container">
-              <button
-                className="create_workspace_btn"
-                onClick={handleCreateWorkspace}
-              >
-                createWorkspace
-              </button>
-            </div>
+    
           </div>
         </div>
         <div className="workspace_img_container">
-          <img className="workspace_img" src={workspace} alt="workspace" />
+          <img className="workspace_img" src="/images/workspace.png" alt="workspace" />
         </div>
       </div>
       {showCreateWorkspace && (

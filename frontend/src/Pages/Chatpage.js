@@ -12,8 +12,8 @@ const Chatpage = () => {
   const { user } = ChatState();
 
   return (
-    <div className="chats-sec" style={{ width: "100%" }}>
-      {user && <SideDrawer />}
+    <div className="chats-sec" style={{ width: "100%", height:"100%"}}>
+      {/* {user && <SideDrawer />} */}
       <div className="chat-main">
         <div className="sidebar">
           {user && <MyChats fetchAgain={fetchAgain} />}

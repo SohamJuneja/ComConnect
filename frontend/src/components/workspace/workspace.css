@@ -1,6 +1,6 @@
 .workspace_page {
-  width: 100vw;
-  height: 100%;
+  width: 85vw;
+  height: 35vh;
   padding: 0.2rem;
 }
 .workspace_display {
@@ -11,10 +11,17 @@
   gap: 1rem;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(90deg, rgb(180, 92, 224), rgb(72, 21, 139));
+  background:transparent;
   color: #fff;
-  padding: 1rem; /* Add padding for better spacing */
 }
+.translucent-box {
+  background:#80a8e447; 
+  backdrop-filter: blur(5.78645896911621px); 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  border-image-source: linear-gradient(135.59deg, rgba(88, 130, 193, 0.49) 1.28%, rgba(88, 130, 193, 0.11) 96.26%);
+  margin: 0; /* Removed margin-bottom to eliminate gap */
+  }
 
 .workspace_content {
   width: 60%; /* Adjust width to allow more space for the image */
@@ -27,26 +34,37 @@
 }
 
 .workspace_content_heading {
-  font-size: 36px;
-  font-weight: 600;
+  font-family: "Poppins";
+  font-size: 65px;
+  font-weight: 800;
+  line-height: 90px;
 }
 
 .workspace_content_description {
+  font-family:"Poppins";
   font-size: 18px;
   font-weight: 400;
+  line-height: 36px;
 }
-.create_workspace_btn {
-  padding: 10px 20px;
-  color: #fff;
-  background-color: #2d83a8;
+.create_workspace_btn { 
+  display: inline-flex; /* Align content inside the button */
+  align-items: center; 
+  justify-content: center; 
+  color: #04539D;
+  background-color: #FBB03B;
   border-radius: 10px;
-  width: auto; /* Adjust width to fit content */
-  text-align: center; /* Center text */
-  font-size: 16px; /* Adjust font size */
-  font-weight: bold; /* Make text bold */
-  cursor: pointer; /* Add pointer cursor */
-  transition: all 0.3s ease; /* Add transition for hover effect */
+  height: 4.5rem; 
+  width: auto; 
+  font-size: 24px; 
+  font-weight: bold; 
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0 2rem; /* Add horizontal padding for spacing */
+  text-decoration: none; /* Remove underline if applicable */
+  border: none;
+  margin-left: 1.5rem;
 }
+
 
 .create_workspace_btn:hover {
   background-color: #1a5a73; /* Change background color on hover */
@@ -54,21 +72,22 @@
 }
 .create_workspace_btn_container {
   margin-top: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+  display: inline;
+  height: 50%;
+  
 }
 .workspace_img_container {
-  width: 40%; /* Adjust width to fit the image */
+  width:40%;
+  height: 95%; 
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 .workspace_img {
-  width: 100%; /* Make the image responsive */
-  height: auto; /* Maintain aspect ratio */
-  max-width: 200px; /* Set a max width for the image */
+  width: 72%; /* Make the image responsive */
+  height: 95%; /* Maintain aspect ratio */
+  
 }
 
 /* . {
@@ -155,6 +174,7 @@
   border: 1px solid #000;
 }
 
+
 .workspace_container {
   display: flex;
   align-items: center;
@@ -177,16 +197,23 @@
   border-radius: 10px;
   border: 1px solid #fff;
 }
-.join_workspace_btn {
+.join_workspace_btn { 
+  font-family: "Poppins";      
+  display: inline-flex; 
   padding: 10px 20px;
-  background-color: #2d83a8;
-  color: #fff;
+  background-color: #FBB03B;
+  color: #04539D;
   border-radius: 10px;
   transition: all 0.3s ease;
-  font-size: 16px; /* Adjust font size */
-  font-weight: bold; /* Make text bold */
+  font-size: 24px; 
   cursor: pointer; /* Add pointer cursor */
   text-align: center; /* Center text */
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+  height: 4.5rem; 
+  width: auto;
+  margin-top: 0.5rem;
 }
 
 .join_workspace_btn:hover {
@@ -202,40 +229,51 @@
   width: 100%;
   height: 20%;
 }
-
 .workspace_main {
   width: 100vw;
   height: 100vh;
   display: flex;
+  align-items: center;
+
   flex-direction: column;
+  background-color:  #04539D;
+  ;
 }
 
+.workspace_intro{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:87vw; 
+}
+.content_block{
+  width: 65%;
+
+}
+.image_block{
+  width: 35%;
+}
+
+.workspace_rizz{
+  display: flex;
+}
 
 .worksapce_lol {
   width: 100vw;
-  height: 100%;
+  height: 80%;
 }
 
 .join_workspace_modal {
-  width: 100vw;
-  height: 100%;
+  width: 75vw;
+  height:auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  border-radius:1rem;
   
 }
-.join_workspace_lol {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  gap: 1rem;
-  padding: 5rem;
-  height: 100%;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-}
+
 
 
 @media (max-width: 600px) {
@@ -314,8 +352,15 @@
 
 .join_workspace_lol {
   display: grid; /* Use grid layout */
-  grid-template-columns: repeat(10, 1fr); /* 10 columns for the first row */
-  gap: 2rem; /* Space between buttons */
+  grid-template-columns: repeat(5, 1fr); 
+  gap: 2.5rem;
+  padding: 5rem;
+  height: 100%;
+  width: 100%;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+
 }
 
 .join_workspace_lol > :nth-child(n + 11) {
@@ -346,12 +391,13 @@
 
 .cnt {
   width: 100%; /* Make buttons take full width of the grid cell */
-  height: 50px; /* Set a fixed height for all buttons */
+  height: 60px; /* Set a fixed height for all buttons */
   display: flex; /* Center text inside the button */
   align-items: center; /* Center vertically */
   justify-content: center; /* Center horizontally */
   padding: 10px; /* Add padding for better spacing */
   text-align: center; /* Center the text */
+  color:#04539D;
 }
 
 .modal_background {

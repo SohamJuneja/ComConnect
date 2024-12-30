@@ -12,7 +12,7 @@ const Wave = ({ top, left, right,filter,width,height}) => (
       zIndex={0}
       w={width}
       h={height}
-      filter={filter}
+      filter={filter} 
       bg="transparent" 
     />
   );
