@@ -30,9 +30,9 @@ function Homepage() {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        height="100vh"
+    
       >
-        <Box p={2} width="100%" className="container">
+        <Box  width="100%" className="container">
           <Box className="left-box" flex="1" display="flex" flexDirection="column" bottom="0px">
             <Box position="relative" mb="0px">
               {/* Conditionally render text only when it's not signup */}
@@ -67,7 +67,7 @@ function Homepage() {
             </Tabs>
 
       
-            <Box mt={4} display="flex" justifyContent="center">
+            <Box mt={3} display="flex" justifyContent="center">
               <Text_Box>
                 {isSignup
                   ? "Already have an account? "

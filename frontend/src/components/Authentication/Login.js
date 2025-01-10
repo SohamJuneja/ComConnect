@@ -127,7 +127,9 @@ const Login = () => {
               </Button>
             </InputRightElement>
           </InputGroup>
-          <Text_Box children="By signing up, you are creating a COMCONNECT account, and you agree to COMCONNECT’s Term of Use and Privacy Policy." />
+          <Text_Box  
+          fontSize={["10px"]}
+          children="By signing up, you are creating a COMCONNECT account, and you agree to COMCONNECT’s Term of Use and Privacy Policy." />
           <RememberMe />
           <Button
             colorScheme="#FBB03B;"
