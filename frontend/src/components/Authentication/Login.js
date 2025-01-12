@@ -1,11 +1,11 @@
 import { Button } from "@chakra-ui/button";
-import { Link as RouterLink } from "react-router-dom";
+
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
 import { VStack } from "@chakra-ui/layout";
 import { useState } from "react";
 import axios from "axios";
-import { useToast, Divider, Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { useToast, Divider, Box, Flex } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { ChatState } from "../../Context/ChatProvider";
 import Text_Box from "../Elements/text_box";
@@ -127,7 +127,9 @@ const Login = () => {
               </Button>
             </InputRightElement>
           </InputGroup>
-          <Text_Box children="By signing up, you are creating a COMCONNECT account, and you agree to COMCONNECT’s Term of Use and Privacy Policy." />
+          <Text_Box  
+          fontSize={["10px"]}
+          children="By signing up, you are creating a COMCONNECT account, and you agree to COMCONNECT’s Term of Use and Privacy Policy." />
           <RememberMe />
           <Button
             colorScheme="#FBB03B;"
@@ -152,9 +154,9 @@ const Login = () => {
             <Divider orientation="horizontal" flex="1" borderColor="#E2E8F0" />
           </Flex>
           <GoogleLoginButton />
+          
         </FormControl>
-
-        {/* <Box mt={4} display="flex" alignItems="center" justifyContent="center">
+        {/* <Box  display="flex" alignItems="center" justifyContent="center">
           <Text_Box fontSize="sm" color="gray.600">
             Don’t have an account?{" "}
             <Button
@@ -164,8 +166,10 @@ const Login = () => {
             >
               Sign Up here!
             </Button>
-          </Text_Box> */}
-        {/* </Box> */}
+          </Text_Box>
+        </Box> */}
+
+      
       </>
     )}
   </VStack>
@@ -173,3 +177,5 @@ const Login = () => {
 };
 
 export default Login;
+
+

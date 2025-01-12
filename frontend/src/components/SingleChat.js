@@ -1,8 +1,10 @@
 import { FormControl } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
-import { Box, Text } from "@chakra-ui/layout";
+import { Box, Text  } from "@chakra-ui/layout";
 import "./styles.css";
-import { IconButton, Spinner, useToast } from "@chakra-ui/react";
+import { Avatar } from "@chakra-ui/avatar";
+import { ChevronDownIcon } from "@chakra-ui/icons";
+import { Button, IconButton, Spinner, useToast } from "@chakra-ui/react";
 import { getSender, getSenderFull } from "../config/ChatLogics";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -14,6 +16,11 @@ import "./styles.css";
 import io from "socket.io-client";
 import UpdateGroupChatModal from "./miscellaneous/UpdateGroupChatModal";
 import { ChatState } from "../Context/ChatProvider";
+import SideDrawer from "./miscellaneous/SideDrawer";
+import {Menu , MenuDivider,MenuItem,MenuList,MenuButton } from "@chakra-ui/menu";
+import { useNavigate } from "react-router-dom";
+
+
 const ENDPOINT = "";
 var socket, selectedChatCompare;
 
@@ -25,6 +32,12 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [typing, setTyping] = useState(false);
   const [istyping, setIsTyping] = useState(false);
   const toast = useToast();
+  const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    localStorage.removeItem("userInfo");
+    navigate("/");
+  };
 
   const defaultOptions = {
     loop: true,
@@ -73,7 +86,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   console.log(token);
 
   const sendMessage = async (event) => {
-    if (event.key === "Enter" && newMessage) {
+    if ((!event || event.key === "Enter"|| event.type === "click") && newMessage) {
       socket.emit("stop typing", selectedChat._id);
       try {
         const config = {
@@ -167,8 +180,20 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   return (
     <>
+    <SideDrawer />
       {selectedChat ? (
         <>
+        <Box
+        d="flex"
+        flexDir="column"
+        height="95%">
+        <Box
+        backgroundColor={"black"}
+        display="flex"
+  flexDirection="row"
+  alignItems={"center"}
+  width="100%"
+        >
           <Text
             fontSize={{ base: "28px", md: "30px" }}
             pb={3}
@@ -178,9 +203,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             w="100%"
             justifyContent="space-between"
             alignItems="center"
+            color={"whitesmoke"}
           >
             <IconButton
               d={{ base: "flex", md: "none" }}
+              mx={"1.5"}
               icon={<ArrowBackIcon />}
               onClick={() => setSelectedChat("")}
             />
@@ -203,15 +230,35 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 </>
               ))}
           </Text>
+          <div>
+          <Menu>
+            <MenuButton as={Button} mx={"5px"} bg="white" rightIcon={<ChevronDownIcon />}>
+              <Avatar
+                size="sm"
+                cursor="pointer"
+                name={user.name}
+                src={user.pic}
+              />
+            </MenuButton>
+            <MenuList>
+              <ProfileModal user={user}>
+                <MenuItem>My Profile</MenuItem>{" "}
+              </ProfileModal>
+              <MenuDivider />
+              <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+            </MenuList>
+          </Menu>
+          </div>
+          </Box>
           <Box
             d="flex"
             flexDir="column"
             justifyContent="flex-end"
             p={3}
-            bg="#efbbff; "
+            mb={3}
+            bg="white"
             w="100%"
-            h="calc(100vh - 220px)" // Adjust height to fit the viewport
-            borderRadius="lg"
+            h="100%" // Adjust height to fit the viewport
             overflow="hidden"
             position="relative"
           >
@@ -239,19 +286,31 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               position="absolute"
               bottom="0"
               width="100%"
-              bg="#E8E8E8"
+              bg="black"
               p={3}
             >
               {istyping ? <div>typing...</div> : <></>}
-              <Input
-                variant="filled"
-                bg="#E0E0E0"
-                placeholder="Enter a message.."
-                value={newMessage}
-                onChange={typingHandler}
-                className="enteramsg"
-              />
+              <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
+    <Input
+      width="90%" // Adjust width to accommodate the button
+      variant="filled"
+      bg="black"
+      placeholder="Type Here"
+      value={newMessage}
+      onChange={typingHandler}
+      borderColor="grey"
+      color={"white"}
+      className="enteramsg"
+    />
+    <Button ml={2} colorScheme="blue"  onClick={(e) => {
+        e.preventDefault(); 
+        sendMessage();
+      }}>
+      Send
+    </Button>
+  </div>
             </FormControl>
+          </Box>
           </Box>
         </>
       ) : (

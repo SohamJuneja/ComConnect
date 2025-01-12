@@ -8,8 +8,8 @@ import WorkspaceSelection from "./components/workspace/WorkspaceSelection";
 import WorkspaceProvider from "./Context/WorkspaceProvider";
 import TaskAllocatorPage from "./components/task_allocator/TaskAllocatorPage";
 import MyTasks from "./components/task_allocator/MyTasks";
-
 import Signup from "./components/Authentication/Signup";
+
 
 const App = () => {
   return (
@@ -20,6 +20,7 @@ const App = () => {
             <div className="container">
               <Routes>
                 <Route path="/" element={<Homepage />} />
+                <Route path="/signup" element={<Signup />} />
                 <Route path="/tasks/:workspaceId" element={<TaskAllocatorPage />} /> {/* Updated route */}
                 <Route path="/my-tasks" element={<MyTasks />} />
                 <Route path="/chats" element={<Chatpage />} />
