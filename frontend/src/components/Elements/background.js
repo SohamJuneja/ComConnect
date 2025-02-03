@@ -17,28 +17,28 @@ const BackgroundComponent = ({ children, ...props }) => {
       {...props}
     >
       <Wave
-         top={{
-          base: "5vh",  
-          sm: "4vh",    
-          md: "3.5vh",   
-          lg: "3.3vh", 
+        top={{
+          base: "5vh",
+          sm: "4vh",
+          md: "3.5vh",
+          lg: "3.3vh",
         }}
         left={{
-          base: "5vw",             
+          base: "5vw",
           sm: "4vw",
-          md: "3.75vw",  
-          lg: "3.5vw",   
+          md: "3.75vw",
+          lg: "3.5vw",
         }}
         height={{
-          base: "6vh",            
-           sm: "5vh",   
-           md: "4.75vh",  
-          lg: "4.75vh", 
+          base: "6vh",
+          sm: "5vh",
+          md: "4.75vh",
+          lg: "4.75vh",
         }}
         width={{
-          base: "10vw", 
-          sm: "9vw",   
-          md: "8.5vw",  
+          base: "10vw",
+          sm: "9vw",
+          md: "8.5vw",
           lg: "8.25vw",
         }}
         filter="drop-shadow(0px 2.85px 10.67px rgba(0, 0, 0, 0.5))"
@@ -60,15 +60,18 @@ const BackgroundComponent = ({ children, ...props }) => {
         filter="drop-shadow(0px 2.85px 10.67px rgba(0, 0, 0, 0.5))"
       />
 
-
-
-
       <Flex
         direction="column"
         height="100vh"
         alignItems="center"
         px={4}
-       
+        paddingTop={{
+          base: "12vh", 
+          sm: "12vh", 
+          md: "15vh", 
+          lg: "15vh",
+          xl: "17vh", 
+        }}
       >
         <Box>
           <Flex
@@ -82,7 +85,7 @@ const BackgroundComponent = ({ children, ...props }) => {
           >
             <Text
               fontFamily="Arial"
-              fontSize={["5vh","8vh","12vh","14vh","14vh"]}
+              fontSize={["8vh", "8vh", "12vh", "14vh", "14vh"]}
               fontWeight="900"
               textAlign="left"
               bg="linear-gradient(0deg, rgba(0, 122, 255, 0.15), rgba(0, 122, 255, 0.15)), linear-gradient(0deg, #CBDCF3, #CBDCF3)"
@@ -94,7 +97,7 @@ const BackgroundComponent = ({ children, ...props }) => {
             </Text>
             <Text
               fontFamily="Arial"
-              fontSize={["5vh","8vh","12vh","14vh","14vh"]}
+              fontSize={["8vh", "8vh", "12vh", "14vh", "14vh"]}
               fontWeight="900"
               textAlign="left"
               color="transparent"
@@ -112,9 +115,7 @@ const BackgroundComponent = ({ children, ...props }) => {
 
         <Box
           borderRadius="10px"
-          width={["95%","90%","85%","75%"]}
-          position="relative" 
-          top={["5vh","8vh","10vh","14.5vh"]}
+          width={["95%", "90%", "85%", "75%"]}
           zIndex={3}
           className="translucent-box"
         >
